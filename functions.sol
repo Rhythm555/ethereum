@@ -1,6 +1,5 @@
-//SPOX-License-Identifier: MIT 
-pragma solidity 0.8.18;
-
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.10;
 /*
 
 REQUIREMENTS
@@ -16,39 +15,30 @@ REQUIREMENTS
 5. Lastly, your burn function should have conditionals to make sure the balance of "sender" is greater than or equal to the amount that is supposed to be burned.
 */
 
+
 contract MyToken {
 
-// public variables here
+    // Public variables
+    string public tname = "scifi"; 
+    string public tabbry = "sf";
+    uint public tsupply = 100;
 
-string public tname = "scifi"; 
-string public tabbry = "sf";
+    // Mapping to store balances
+    mapping (address => uint) public assest;
 
-uint public tsupply= 100;
+    // Mint function
+    function mint(address abc, uint value) external {
+        tsupply += value;
+        assest[abc] += value;
+    }
 
-// mapping variable here
+    // Burn function
+    function burn(address abc, uint value) external {
+        require(assest[abc] >= value, "Insufficient balance to burn");
 
-mapping (address => uint) public assesti;
-
-// mint function
-
-I
-
-function mint(address abc, uint value) external {
-
-tsupply += value;
-
-assest [abc] +=value;
-
-// burn function
-
-function burn(address abc, uint value) external {
-
-if(assest[abc]= value) {
-    tsupply -= value;
-
-assest[abc]-= value;
-
-}
+        tsupply -= value;
+        assest[abc] -= value;
+    }
 }
 
-}
+
